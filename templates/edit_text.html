@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+    <title>Coordenadas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Botón de cierre dentro del contenedor sombreado -->
+        <button onclick="window.location.href='/'" class="close-btn">X</button>
+
+        <h2>Edita las coordenadas si es necesario</h2>
+        
+        <form action="/generate_kml" method="post">
+            <!-- Selector de tipo de coordenadas -->
+            <label>Tipo de Coordenadas:</label>
+            <select name="tipo_coordenadas" id="tipo_coordenadas" onchange="toggleUTMFields()">
+                <option value="geo">Geográficas</option>
+                <option value="utm">UTM</option>
+            </select><br>
+
+            <div class="coordinates-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th id="latitud-header">Latitud</th>
+                            <th id="longitud-header">Longitud</th>
+                        </tr>
+                    </thead>
+                    <tbody id="coordinates-table">
+                        {% for coord in coordenadas %}
+                        <tr>
+                            <td><input type="text" name="latitud[]" value="{{ coord[0] }}" class="coordinate-input"></td>
+                            <td><input type="text" name="longitud[]" value="{{ coord[1] }}" class="coordinate-input"></td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td><input type="text" name="latitud[]" placeholder="Nueva Latitud" class="coordinate-input"></td>
+                            <td><input type="text" name="longitud[]" placeholder="Nueva Longitud" class="coordinate-input"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="button-row">
+                <button type="button" id="add-row" class="add-row-btn">+</button>
+                <button type="button" id="remove-row" class="remove-row-btn">-</button>
+            </div>
+
+            <div id="utm-fields" class="hidden">
+                <label>Zona:</label>
+                <input type="text" id="zone" class="zone-input" name="zone"><br>
+                
+                <label>Hemisferio (N/S):</label>
+                <select name="hemisferio">
+                    <option value="N">Norte</option>
+                    <option value="S">Sur</option>
+                </select><br>
+            </div>
+            
+            <button type="submit" class="generate-kml-btn">Generar KML</button>
+        </form>
+    </div>
+
+    <script>
+        function toggleUTMFields() {
+            var tipo = document.getElementById('tipo_coordenadas').value;
+            var utmFields = document.getElementById('utm-fields');
+            utmFields.style.display = (tipo === 'utm') ? 'block' : 'none';
+            document.getElementById('latitud-header').textContent = (tipo === 'utm') ? 'Este (m)' : 'Latitud';
+            document.getElementById('longitud-header').textContent = (tipo === 'utm') ? 'Norte (m)' : 'Longitud';
+        }
+
+        window.onload = toggleUTMFields;
+
+        document.getElementById("add-row").addEventListener("click", function() {
+            const table = document.getElementById("coordinates-table");
+            const newRow = document.createElement("tr");
+            
+            const newLatCell = document.createElement("td");
+            const latInput = document.createElement("input");
+            latInput.type = "text";
+            latInput.name = "latitud[]";
+            latInput.placeholder = "Nueva Latitud";
+            latInput.className = "coordinate-input";
+            newLatCell.appendChild(latInput);
+
+            const newLonCell = document.createElement("td");
+            const lonInput = document.createElement("input");
+            lonInput.type = "text";
+            lonInput.name = "longitud[]";
+            lonInput.placeholder = "Nueva Longitud";
+            lonInput.className = "coordinate-input";
+            newLonCell.appendChild(lonInput);
+
+            newRow.appendChild(newLatCell);
+            newRow.appendChild(newLonCell);
+            table.appendChild(newRow);
+        });
+
+        document.getElementById("remove-row").addEventListener("click", function() {
+            const table = document.getElementById("coordinates-table");
+            if (table.rows.length > 1) {
+                table.deleteRow(table.rows.length - 1);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("../static/Fondo.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    color: #ffffff;
+}
+
+/* Contenedor principal */
+.container {
+    position: relative; /* Para posicionar el botón de cierre dentro del contenedor */
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: center;
+}
+
+/* Título */
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Tabla de coordenadas */
+.coordinates-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.coordinates-table th, .coordinates-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    color: #ffffff;
+}
+
+.coordinates-table th {
+    background-color: #333333;
+    font-weight: bold;
+}
+
+.coordinates-table td {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Ocultar campos si no es UTM */
+.hidden {
+    display: none;
+}
+
+/* Botón de envío */
+button {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #135abf;
+}
+
+/* Entrada de coordenadas */
+.coordinate-input {
+    width: 90%;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    margin: auto;
+}
+
+/* Estilo para el botón de agregar fila (+) */
+.add-row-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 24px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-right: 10px; /* Espacio entre los botones */
+}
+
+.add-row-btn:hover {
+    background-color: #218838;
+}
+
+/* Botón para generar KML */
+.generate-kml-btn {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.generate-kml-btn:hover {
+    background-color: #135abf;
+}
+
+/* Margen entre botones y entrada de Zona */
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Ajuste de espacio entre botones */
+    margin-bottom: 10px; /* Espacio extra para separación */
+}
+
+
+/* Estilo para el botón de eliminar fila (-) */
+.remove-row-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 24px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Estilos del selector de tipo de coordenadas */
+select {
+    background-color: #333; /* Fondo oscuro */
+    color: #fff; /* Texto blanco */
+    border: 1px solid #777; /* Borde gris */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 5px 10px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de fuente */
+    appearance: none; /* Remueve estilo por defecto */
+    cursor: pointer; /* Cursor pointer */
+    outline: none; /* Sin borde adicional */
+    margin-bottom: 10px; /* Espacio abajo */
+}
+
+/* Hover para mejorar la interacción del usuario */
+select:hover {
+    border-color: #fff; /* Cambia el color del borde al pasar el cursor */
+}
+
+/* Opciones dentro del selector */
+option {
+    background-color: #333; /* Fondo oscuro para las opciones */
+    color: #fff; /* Texto en blanco */
+}
+
+/* Input para Zona */
+input[type="text"] {
+    background-color: #333; /* Fondo oscuro */
+    color: #fff; /* Texto blanco */
+    border: 1px solid #777; /* Borde gris */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 5px 10px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de fuente */
+    outline: none; /* Sin borde adicional */
+}
+
+/* Hover para mejorar la interacción del usuario */
+input[type="text"]:hover {
+    border-color: #fff; /* Cambia el color del borde al pasar el cursor */
+}
+
+/* Estilo para el texto dentro de las celdas de coordenadas cuando están vacías */
+.coordinate-input::placeholder {
+    color: #CCCCCC; /* Un color gris claro para buen contraste */
+    opacity: 1; /* Asegura que el color sea visible */
+}
+
+/* Botón de cierre */
+.close-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.close-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 16px; /* Ajustado el tamaño de la fuente para que sea más pequeño */
+    width: 10px; /* Tamaño reducido */
+    height: 35px; /* Tamaño reducido */
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 5px; /* Ajustado para mejorar la alineación */
+    right: 10px; /* Ajustado para mejorar la alineación */
+    z-index: 1;
+}
+
+.close-btn:hover {
+    background-color: #ff1a1a;
+}
+
+/* Estilo de separación para el campo Zona */
+.zone-input {
+    margin-right: 15px; /* Aumenta este valor para mayor separación */
+}

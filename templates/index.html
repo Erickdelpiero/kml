@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor KML</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<!-- Contenedor superior para el título y el texto de bienvenida -->
+<div class="header-container">
+    <h1 class="welcome-title">¡Bienvenido!</h1>
+    <p class="welcome-text">¡Hola!, este espacio es para ayudarte a generar el polígono KML de tu proyecto, a partir de coordenadas extraídas de una imagen. Estas pueden estar en coordenadas geográficas (Decimales) o coordenadas UTM.</p>
+    <p class="welcome-text">Puedes subir una imagen o ingresar las coordenadas manualmente. También puedes usarlo simplemente para extraer las coordenadas de una imagen y descargarlas en un archivo CSV.</p>
+    <p class="welcome-text">*En caso usar una imagen para extraer las coordenadas se recomienda verificar que no haya errores.</p>
+</div>
+
+<!-- Contenedor inferior para el formulario de carga de archivos -->
+<div class="upload-section">
+    <div class="upload-container">
+        <!-- Botón de cerrar con evento onclick para resetear el formulario -->
+        <button class="close-button" onclick="resetForm()">&times;</button>
+        <h2>Sube tu Imagen para Generar KML</h2>
+        
+        <!-- Área de arrastrar y soltar -->
+        <form action="/upload" method="post" enctype="multipart/form-data" id="uploadForm">
+            <label class="drop-area" for="fileInput" id="dropArea">
+                <input type="file" name="file" id="fileInput" accept="image/*" style="display: none;" required>
+                Arrastra y suelta tu archivo aquí o haz clic para seleccionarlo
+            </label>
+        </form>
+
+        <!-- Información del archivo cargado -->
+        <div class="file-info" id="fileInfo">No se ha cargado ningún archivo</div>
+
+        <!-- Botones de acción -->
+        <div class="buttons">
+            <button class="button" onclick="validateAndSubmit()">Extraer Coordenadas</button>
+            <button class="button" onclick="window.location.href='/edit_text'">Ingresar Coordenadas Manualmente</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para el mensaje de error -->
+<div class="modal" id="errorModal">
+    <div class="modal-content">
+        <p>No se ha cargado la imagen</p>
+        <button class="button" onclick="closeModal()">OK</button>
+    </div>
+</div>
+
+<script>
+    // Variables de elementos HTML
+    const fileInput = document.getElementById('fileInput');
+    const fileInfo = document.getElementById('fileInfo');
+    const dropArea = document.getElementById('dropArea');
+    const errorModal = document.getElementById('errorModal');
+
+    // Mostrar el nombre del archivo cargado y ocultar el área de carga
+    fileInput.addEventListener('change', function() {
+        const fileName = fileInput.files[0].name;
+        fileInfo.textContent = fileName; // Actualizar el texto con el nombre del archivo
+        dropArea.classList.add('hidden'); // Ocultar el área de carga
+    });
+
+    // Función para validar si hay un archivo cargado antes de enviar el formulario
+    function validateAndSubmit() {
+        if (fileInput.files.length === 0) { // Si no hay archivo seleccionado
+            errorModal.style.display = 'flex'; // Mostrar el modal de error
+        } else {
+            document.getElementById('uploadForm').submit(); // Enviar el formulario si hay archivo
+        }
+    }
+
+    // Función para cerrar el modal
+    function closeModal() {
+        errorModal.style.display = 'none'; // Ocultar el modal
+    }
+
+    // Función para resetear el formulario cuando se hace clic en el botón de cerrar
+    function resetForm() {
+        fileInput.value = ""; // Limpiar el input de archivo
+        fileInfo.textContent = "No se ha cargado ningún archivo"; // Restablecer el mensaje de archivo
+        dropArea.classList.remove('hidden'); // Volver a mostrar el área de carga
+    }
+
+    // Eventos de arrastrar y soltar
+    dropArea.addEventListener('dragover', (event) => {
+        event.preventDefault(); // Prevenir el comportamiento por defecto
+        dropArea.classList.add('highlight'); // Añadir clase de resaltado
+    });
+
+    dropArea.addEventListener('dragleave', () => {
+        dropArea.classList.remove('highlight'); // Remover clase de resaltado al salir del área
+    });
+
+    dropArea.addEventListener('drop', (event) => {
+        event.preventDefault(); // Prevenir el comportamiento por defecto
+        dropArea.classList.remove('highlight'); // Remover clase de resaltado
+        const files = event.dataTransfer.files; // Obtener archivos arrastrados
+
+        if (files.length > 0) {
+            fileInput.files = files; // Asignar el archivo al input
+            const fileName = files[0].name;
+            fileInfo.textContent = fileName; // Mostrar el nombre del archivo
+            dropArea.classList.add('hidden'); // Ocultar el área de carga
+        }
+    });
+</script>
+
+</body>
+</html>

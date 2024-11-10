@@ -1,0 +1,37 @@
+.
+├── app.py
+├── Estructura.txt
+├── Kml
+│   ├── bin
+│   ├── include
+│   ├── lib
+│   ├── lib64 -> lib
+│   └── pyvenv.cfg
+├── kml_files
+│   └── Polygon.kml
+├── PreProcess.py
+├── Process.py
+├── __pycache__
+│   └── Process.cpython-312.pyc
+├── requirements.txt
+├── static
+│   ├── Fondo2.webp
+│   ├── Fondo3.webp
+│   ├── Fondo4.webp
+│   ├── Fondo5.webp
+│   ├── Fondo.webp
+│   ├── styles2.css
+│   └── styles.css
+├── templates
+│   ├── edit_text.html
+│   └── index.html
+└── uploads
+    ├── Imagen1.png
+    ├── Imagen2.png
+    ├── Imagen5.png
+    ├── Imagen6.png
+    ├── Imagen8.png
+    ├── P1.png
+    └── Test.png
+
+11 directories, 24 files
