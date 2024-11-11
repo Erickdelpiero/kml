@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, send_file
+from flask import Flask, request, render_template, redirect, url_for, send_file, jsonify
 import Process  # Importamos el archivo Process.py como un módulo
 import os
 

@@ -107,6 +107,25 @@
             dropArea.classList.add('hidden'); // Ocultar el área de carga
         }
     });
+
+    // Evento para pegar una imagen desde el portapapeles
+    document.addEventListener('paste', (event) => {
+        const items = event.clipboardData.items;
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].type.indexOf('image') !== -1) {
+                const blob = items[i].getAsFile();
+                const file = new File([blob], "pasted_image.png", { type: blob.type });
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                fileInput.files = dataTransfer.files;
+
+                // Actualizar la interfaz con el nombre del archivo pegado
+                fileInfo.textContent = file.name;
+                dropArea.classList.add('hidden');
+                break;
+            }
+        }
+    });
 </script>
 
 </body>

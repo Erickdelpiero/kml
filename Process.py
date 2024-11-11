@@ -28,7 +28,6 @@ def extract_text_from_image(image):
 def process_text_for_coordinates(texto_extraido):
     lineas = texto_extraido.splitlines()
     coordenadas = []
-
     for linea in lineas:
         linea = linea.strip('| ').strip()
         if not linea:
@@ -40,16 +39,17 @@ def process_text_for_coordinates(texto_extraido):
         # Verifica que obtengamos exactamente dos componentes por línea para considerarla válida
         if len(match) == 2:
             coordenadas.append(match)
-
+    
     # Calcular el número más común de dígitos en cada columna
     col1_digit_counts = [len(coord[0].split('.')[0].replace('-', '')) for coord in coordenadas]
     col2_digit_counts = [len(coord[1].split('.')[0].replace('-', '')) for coord in coordenadas]
-    
+    print('Sospecha:')
+    print('col1_digit_counts')
+    print('col2_digit_counts')
     col1_common_digit_count = Counter(col1_digit_counts).most_common(1)[0][0]
     col2_common_digit_count = Counter(col2_digit_counts).most_common(1)[0][0]
-
     coordenadas_corregidas = []
-
+    
     for coord in coordenadas:
         corrected_coord = []
         for i, (parte_entera, common_digit_count) in enumerate(zip([coord[0], coord[1]], [col1_common_digit_count, col2_common_digit_count])):
@@ -79,7 +79,6 @@ def process_text_for_coordinates(texto_extraido):
             corrected_coord.append(cleaned_coord)
         
         coordenadas_corregidas.append(corrected_coord)
-    
     return coordenadas_corregidas
 
 # Función para convertir coordenadas UTM a geográficas

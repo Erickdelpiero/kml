@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="1">
+        <Style id="8">
+            <PolyStyle id="9">
+                <color>7d00ff00</color>
+                <colorMode>normal</colorMode>
+                <fill>1</fill>
+                <outline>1</outline>
+            </PolyStyle>
+        </Style>
+        <Placemark id="3">
+            <name>Área del Polígono</name>
+            <styleUrl>#8</styleUrl>
+            <Polygon id="2">
+                <outerBoundaryIs>
+                    <LinearRing id="6">
+                        <coordinates>-71.80510100070435,-16.67763007311759,0.0 -71.80440266328465,-16.678475240543094,0.0 -71.80510953024333,-16.67901743793434,0.0 -71.80580777206926,-16.67817226960178,0.0 -71.80510100070435,-16.67763007311759,0.0</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+    </Document>
+</kml>
