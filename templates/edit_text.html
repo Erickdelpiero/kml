@@ -25,28 +25,24 @@
                         <tr>
                             <th id="latitud-header">Latitud</th>
                             <th id="longitud-header">Longitud</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody id="coordinates-table">
                         {% for coord in coordenadas %}
                         <tr>
-                            <td><input type="text" name="latitud[]" value="{{ coord[0] }}" class="coordinate-input"></td>
-                            <td><input type="text" name="longitud[]" value="{{ coord[1] }}" class="coordinate-input"></td>
+                            <td><input type="text" name="latitud[]" value="{{ coord[0] }}" placeholder="Coordenada" class="coordinate-input"></td>
+                            <td><input type="text" name="longitud[]" value="{{ coord[1] }}" placeholder="Coordenada" class="coordinate-input"></td>
+                            <td class="action-buttons">
+                                <button type="button" class="add-row-btn" onclick="addRow(this)">+</button>
+                                <button type="button" class="remove-row-btn" onclick="removeRow(this)">-</button>
+                            </td>
                         </tr>
                         {% endfor %}
-                        <tr>
-                            <td><input type="text" name="latitud[]" placeholder="Nueva Latitud" class="coordinate-input"></td>
-                            <td><input type="text" name="longitud[]" placeholder="Nueva Longitud" class="coordinate-input"></td>
-                        </tr>
-                    </tbody>
+                    </tbody>                    
                 </table>
-            </div>
+            </div>            
             
-            <div class="button-row">
-                <button type="button" id="add-row" class="add-row-btn">+</button>
-                <button type="button" id="remove-row" class="remove-row-btn">-</button>
-            </div>
-
             <div id="utm-fields" class="hidden">
                 <label>Zona:</label>
                 <input type="text" id="zone" class="zone-input" name="zone"><br>
@@ -69,6 +65,31 @@
             utmFields.style.display = (tipo === 'utm') ? 'block' : 'none';
             document.getElementById('latitud-header').textContent = (tipo === 'utm') ? 'Este (m)' : 'Latitud';
             document.getElementById('longitud-header').textContent = (tipo === 'utm') ? 'Norte (m)' : 'Longitud';
+        }
+
+        function addRow(button) {
+            const row = button.parentNode.parentNode;
+            const newRow = row.cloneNode(true);
+
+            // Limpiar los valores de entrada de la nueva fila y agregar placeholder
+            const latInput = newRow.querySelector('input[name="latitud[]"]');
+            latInput.value = "";
+            latInput.placeholder = "Coordenada";
+
+            const lonInput = newRow.querySelector('input[name="longitud[]"]');
+            lonInput.value = "";
+            lonInput.placeholder = "Coordenada";
+
+            row.parentNode.insertBefore(newRow, row.nextSibling);
+        }
+
+        function removeRow(button) {
+            const row = button.parentNode.parentNode;
+            const table = document.getElementById("coordinates-table");
+
+            if (table.rows.length > 1) { // Verifica que haya al menos una fila
+                row.parentNode.removeChild(row);
+            }
         }
 
         window.onload = toggleUTMFields;

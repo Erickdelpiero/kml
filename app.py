@@ -29,8 +29,10 @@ def upload_image():
 
 @app.route('/edit_text')
 def edit_text():
-    # Renderiza edit_text.html sin coordenadas preprocesadas (para entrada manual)
-    return render_template('edit_text.html', coordenadas=[])
+    coordenadas = []  # Crea una lista vacía inicialmente
+    if not coordenadas:
+        coordenadas.append(["", ""])  # Agrega una fila vacía con dos entradas vacías
+    return render_template("edit_text.html", coordenadas=coordenadas)
 
 
 # Ruta para generar el archivo KML

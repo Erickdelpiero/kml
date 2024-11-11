@@ -235,3 +235,17 @@ input[type="text"]:hover {
 .zone-input {
     margin-right: 15px; /* Aumenta este valor para mayor separación */
 }
+
+.action-buttons {
+    display: flex;
+    gap: 5px; /* Espacio entre los botones */
+    justify-content: center;
+    align-items: center;
+}
+
+.action-buttons button {
+    width: 30px; /* Ajusta el tamaño de los botones según sea necesario */
+    height: 30px;
+    padding: 0;
+    border-radius: 50%;
+}
