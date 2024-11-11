@@ -14,18 +14,22 @@ def index():
 # Ruta para subir imagen y procesarla
 @app.route('/upload', methods=['POST'])
 def upload_image():
-    file = request.files['file']
-    if file and file.filename != '':
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-        file.save(filepath)
-        
-        # Usar funciones de Process.py
-        imagen_preprocesada = Process.load_and_preprocess_image(filepath) #Leo y acondiciono la imagen
-        texto_extraido = Process.extract_text_from_image(imagen_preprocesada) #Extraigo el texto
-        coordenadas = Process.process_text_for_coordinates(texto_extraido) #Texto final limpio
-        
-        # Mostrar el texto extraído y permitir que el usuario lo edite
-        return render_template('edit_text.html', coordenadas=coordenadas)
+    try:
+        file = request.files['file']
+        if file and file.filename != '':
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+            file.save(filepath)
+            
+            # Usar funciones de Process.py
+            imagen_preprocesada = Process.load_and_preprocess_image(filepath)  # Leo y acondiciono la imagen
+            texto_extraido = Process.extract_text_from_image(imagen_preprocesada)  # Extraigo el texto
+            coordenadas = Process.process_text_for_coordinates(texto_extraido)  # Texto final limpio
+            
+            # Redirigir a edit_text con las coordenadas procesadas
+            return redirect(url_for('edit_text', coordenadas=coordenadas))
+    except Exception as e:
+        print(f"Error during coordinate extraction: {e}")
+        return redirect(url_for('edit_text') + '?error=true')
 
 @app.route('/edit_text')
 def edit_text():
