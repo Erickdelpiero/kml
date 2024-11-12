@@ -143,7 +143,7 @@ h2 {
 
 /* Título de bienvenida */
 .welcome-title {
-    font-size: 3.3em;
+    font-size: 5em;
     color: #e1e1e2;
     margin-bottom: 10px;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6); /* Delineado suave en negro */
@@ -228,4 +228,60 @@ h1 {
     font-weight: 600; /* Grosor intermedio para legibilidad */
     margin: 0 auto;
     width: 80%;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    /* Título de bienvenida */
+    .welcome-title {
+        font-size: 3em; /* Reduce el tamaño del título */
+    }
+
+    /* Texto de bienvenida */
+    .welcome-text {
+        font-size: 1em;
+        width: 90%; /* Reduce el ancho para evitar desbordamiento */
+    }
+
+    /* Contenedor del encabezado */
+    .header-container {
+        width: 90%; /* Ajusta el ancho para pantallas pequeñas */
+        padding: 10px; /* Reduce el relleno */
+    }
+
+    /* Contenedor de carga de archivos */
+    .upload-container {
+        width: 85%; /* Ajusta el ancho para pantallas pequeñas */
+        padding: 15px;
+        margin: 0 auto; /* Centra el contenedor */
+    }
+
+    /* Botones */
+    .buttons {
+        display: flex;
+        flex-direction: column; /* Cambia a columna para que los botones se apilen */
+        align-items: center; /* Centra los botones horizontalmente */
+        margin-top: 15px; /* Agrega un espacio superior si es necesario */
+    }
+
+    .button {
+        width: 80%; /* Ancho de los botones en pantallas pequeñas */
+        margin-bottom: 10px;
+        text-align: center; /* Asegura que el texto del botón esté centrado */
+    }
+
+    /* Área de arrastrar y soltar */
+    .drop-area {
+        padding: 15px;
+        font-size: 0.75em; /* Reduce ligeramente el tamaño del texto */
+        text-align: center; /* Centra el texto dentro del área */
+        word-wrap: break-word; /* Permite el ajuste de texto si es demasiado largo */
+    }
+
+
+    /* Modal */
+    .modal-content {
+        width: 80%; /* Ajusta el ancho del modal */
+        padding: 15px;
+    }
 }
