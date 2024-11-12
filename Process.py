@@ -20,8 +20,6 @@ def load_and_preprocess_image(filepath):
 # Función para realizar OCR y extraer texto de la imagen
 def extract_text_from_image(image):
     texto_extraido = pytesseract.image_to_string(image, config="--psm 3")
-    print("Texto Extraído (Pre-Limpieza):")
-    print(texto_extraido)
     return texto_extraido
 
 # Función para limpiar el texto extraído y obtener coordenadas
@@ -43,9 +41,7 @@ def process_text_for_coordinates(texto_extraido):
     # Calcular el número más común de dígitos en cada columna
     col1_digit_counts = [len(coord[0].split('.')[0].replace('-', '')) for coord in coordenadas]
     col2_digit_counts = [len(coord[1].split('.')[0].replace('-', '')) for coord in coordenadas]
-    print('Sospecha:')
-    print('col1_digit_counts')
-    print('col2_digit_counts')
+    
     col1_common_digit_count = Counter(col1_digit_counts).most_common(1)[0][0]
     col2_common_digit_count = Counter(col2_digit_counts).most_common(1)[0][0]
     coordenadas_corregidas = []
@@ -85,7 +81,6 @@ def process_text_for_coordinates(texto_extraido):
 def convert_to_geographic(coordenadas, tipo_coordenadas, zona=None, hemisferio=None):
     coordenadas_geograficas = []
     if tipo_coordenadas == 'utm' and zona and hemisferio:
-        print('Entro a convertir UTM')
         if hemisferio.upper() == 'N':
             proj_utm = Proj(proj='utm', zone=int(zona), ellps='WGS84', south=False)
         elif hemisferio.upper() == 'S':
@@ -95,20 +90,12 @@ def convert_to_geographic(coordenadas, tipo_coordenadas, zona=None, hemisferio=N
         proj_wgs84 = Proj(proj='latlong', datum='WGS84')
 
         for coord in coordenadas:
-            print('Vamos a imprimir la conversión de cada par de coordenadas')
             este = float(coord[0])
-            print(este)
             norte = float(coord[1])
-            print(norte)
-            print('Lo que va a convertir es:')
-            print(proj_utm)
             lon, lat = transform(proj_utm, proj_wgs84, este, norte)
             coordenadas_geograficas.append([lon, lat])
-            print(coordenadas_geograficas)
     else:
         coordenadas_geograficas = [[float(coord[1]), float(coord[0])] for coord in coordenadas]
-    print('Coordenadas ya convertidas')
-    print(coordenadas_geograficas)
     return coordenadas_geograficas
 
 # Función para crear y guardar un archivo KML (Longitud,Latitud)
@@ -118,5 +105,4 @@ def create_kml(coordenadas_geograficas, output_path="PolygonUTM.kml"):
     poligono.outerboundaryis = coordenadas_geograficas + [coordenadas_geograficas[0]]
     poligono.style.polystyle.color = "7d00ff00"
     kml.save(output_path)
-    print(f"Archivo KML generado exitosamente como '{output_path}'.")
     return output_path
