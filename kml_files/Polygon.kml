@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-    <Document id="41">
-        <Style id="48">
-            <PolyStyle id="49">
+    <Document id="1">
+        <Style id="8">
+            <PolyStyle id="9">
                 <color>7d00ff00</color>
                 <colorMode>normal</colorMode>
                 <fill>1</fill>
                 <outline>1</outline>
             </PolyStyle>
         </Style>
-        <Placemark id="43">
+        <Placemark id="3">
             <name>Área del Polígono</name>
-            <styleUrl>#48</styleUrl>
-            <Polygon id="42">
+            <styleUrl>#8</styleUrl>
+            <Polygon id="2">
                 <outerBoundaryIs>
-                    <LinearRing id="46">
-                        <coordinates>-75.47237297142979,-14.408659325078041,0.0 -75.4719562007108,-14.408976607723872,0.0 -75.47172368319151,-14.408687746758643,0.0 -75.47142731441927,-14.40891437384991,0.0 -75.4716598318106,-14.409203235105814,0.0 -75.47149312285187,-14.409330147764573,0.0 -75.47219065940148,-14.410187689119205,0.0 -75.47230231291246,-14.410100496506352,0.0 -75.47266809422682,-14.40981484268913,0.0 -75.47306121363611,-14.409507841043029,0.0 -75.47237297142979,-14.408659325078041,0.0</coordinates>
+                    <LinearRing id="6">
+                        <coordinates>-71.09555721,-17.75550935,0.0 -71.09566243,-17.76454204,0.0 -71.08623507,-17.76464266,0.0 -71.08633988,-17.7736754,0.0 -71.06748395,-17.77387539,0.0 -71.06758787,-17.78290823,0.0 -71.11472947,-17.78240449,0.0 -71.11441088,-17.75530676,0.0 -71.09555721,-17.75550935,0.0</coordinates>
                     </LinearRing>
                 </outerBoundaryIs>
             </Polygon>
