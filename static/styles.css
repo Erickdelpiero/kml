@@ -272,7 +272,7 @@ h1 {
 
     /* Área de arrastrar y soltar */
     .drop-area {
-        padding: 9px;
+        padding: 8px;
         font-size: 0.75em; /* Reduce ligeramente el tamaño del texto */
         text-align: center; /* Centra el texto dentro del área */
         word-wrap: break-word; /* Permite el ajuste de texto si es demasiado largo */
