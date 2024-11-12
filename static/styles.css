@@ -284,4 +284,8 @@ h1 {
         width: 80%; /* Ajusta el ancho del modal */
         padding: 15px;
     }
+
+    .upload-container h2 {
+        margin-top: 30px; /* Añade margen superior */
+    }
 }
